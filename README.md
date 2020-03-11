@@ -10,16 +10,14 @@ Official Docker image for Sagui library.
 
 # Generated files
 
-- `output/libsagui-<n.n.n>-<os>_<arch>.<pkg>`
+```bash
+$ tree -L 1 output/
+output/
+├── html
+├── libsagui-2.5.3_checksums.txt
+├── libsagui-2.5.3-linux_amd64.tar.gz
+├── libsagui-2.5.3-windows_386.zip
+└── libsagui-2.5.3-windows_amd64.zip
 
-`n.n.n` - Version (e.g.: 2.5.4).
-
-`os` - Operating System (linux, windows).
-
-`arch` - Architecture (amd64, 386).
-
-`pkg` - Package (tar.gz, zip).
-
-- `output/html/`
-
-Directory containing all HTML documentation.
+1 directory, 4 files
+```

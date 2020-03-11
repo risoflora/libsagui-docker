@@ -7,14 +7,14 @@
 FROM fedora:30
 
 LABEL Maintainer="Silvio Clecio (silvioprog) <silvioprog@gmail.com>"
-LABEL Name="libsagui_builder"
+LABEL Name="libsagui"
+LABEL Version="1.0.0"
 
 RUN dnf upgrade -y
 
 RUN dnf install -y \
     gnutls-devel \
     git \
-    curl \
     make \
     clang \
     mingw32-gcc \
@@ -22,7 +22,8 @@ RUN dnf install -y \
     mingw32-winpthreads-static \
     mingw64-winpthreads-static \
     cmake \
-    doxygen
+    doxygen \
+    optipng
 
 WORKDIR /sagui
 

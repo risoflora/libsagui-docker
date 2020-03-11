@@ -8,8 +8,7 @@
 
 set -e
 
-output=$(realpath .)/output
+output="$(realpath .)/output"
 
-docker build -t libsagui_builder .
-
-docker run --rm -v $output:/sagui/output libsagui_builder
+docker build -t libsagui .
+docker run --rm -v $output:/sagui/output libsagui

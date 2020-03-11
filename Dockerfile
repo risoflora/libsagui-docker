@@ -12,6 +12,8 @@ LABEL Name="libsagui_builder"
 RUN dnf upgrade -y
 
 RUN dnf install -y \
+    gnutls-devel \
+    git \
     curl \
     make \
     clang \
@@ -19,7 +21,8 @@ RUN dnf install -y \
     mingw64-gcc \
     mingw32-winpthreads-static \
     mingw64-winpthreads-static \
-    cmake
+    cmake \
+    doxygen
 
 WORKDIR /sagui
 

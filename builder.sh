@@ -8,36 +8,46 @@
 
 set -e
 
-dist=/sagui/output
+if [ ! -f /.dockerenv ]; then
+    echo "It will be performed by the container automatically. Exiting ...."
+    exit 1
+fi
 
 clean() {
     rm -rf *
 }
 
-curl -SL https://github.com/risoflora/libsagui/archive/v$SG_VERSION.tar.gz | tar -zx
+dist=/sagui/output
 
-cd libsagui-$SG_VERSION && mkdir build && cd build/
+version=$(curl -s https://raw.githubusercontent.com/risoflora/libsagui/master/include/sagui.h | sed -n 's/#define SG_VERSION_\(.*\) \([0-9]\)/\2/p' | tr '\n' '.' | sed 's/.$//')
+git clone https://github.com/risoflora/libsagui.git libsagui
+cd libsagui && mkdir build && cd build/
 
 # linux_amd64
 clean
 cmake -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=./Output ..
 make package
-cp libsagui-$SG_VERSION.tar.gz $dist/libsagui-$SG_VERSION-linux_amd64.tar.gz
+cp libsagui-$version.tar.gz $dist/libsagui-$version-linux_amd64.tar.gz
 
 # windows_amd64
 clean
 cmake -DMINGW64=ON -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-mingw32-Linux.cmake" ..
 make package
-cp libsagui-$SG_VERSION.zip $dist/libsagui-$SG_VERSION-windows_amd64.zip
+cp libsagui-$version.zip $dist/libsagui-$version-windows_amd64.zip
 
 # windows_386
 clean
 cmake -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-mingw32-Linux.cmake" ..
 make package
-cp libsagui-$SG_VERSION.zip $dist/libsagui-$SG_VERSION-windows_386.zip
+cp libsagui-$version.zip $dist/libsagui-$version-windows_386.zip
 
 # checksums
 cd $dist/
-sha256sum libsagui-$SG_VERSION-linux_amd64.tar.gz \
-    libsagui-$SG_VERSION-windows_amd64.zip \
-    libsagui-$SG_VERSION-windows_386.zip >libsagui-${SG_VERSION}_checksums.txt
+sha256sum * >libsagui-${version}_checksums.txt
+cd -
+
+# docs
+clean
+cmake -DSG_BUILD_HTML=ON -DSG_HTTPS_SUPPORT=ON ..
+make doc
+cp -r docs/html $dist/

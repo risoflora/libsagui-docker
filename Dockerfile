@@ -4,11 +4,11 @@
 # SPDX-License-Identifier: MIT
 #######################################################################
 
-FROM fedora:32
+FROM fedora:33
 
 LABEL Maintainer="Silvio Clecio (silvioprog) <silvioprog@gmail.com>"
 LABEL Name="libsagui"
-LABEL Version="1.0.2"
+LABEL Version="1.0.3"
 
 RUN dnf upgrade -y
 

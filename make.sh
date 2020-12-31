@@ -9,8 +9,15 @@
 set -e
 
 output="$(realpath .)/output"
-rm -rf $output
-mkdir -p $output
+rm -rf "$output"
+mkdir -p "$output"
 
-docker build -t libsagui .
-docker run --rm -v "$output":/sagui/output libsagui
+docker_cmd="docker"
+if test -x "$(which podman)"; then
+  docker_cmd="podman"
+fi
+
+echo "Using $docker_cmd ..."
+
+$docker_cmd build -t libsagui .
+$docker_cmd run --rm -v "$output":/sagui/output libsagui

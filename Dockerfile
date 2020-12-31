@@ -10,9 +10,7 @@ LABEL Maintainer="Silvio Clecio (silvioprog) <silvioprog@gmail.com>"
 LABEL Name="libsagui"
 LABEL Version="1.0.3"
 
-RUN dnf upgrade -y
-
-RUN dnf install -y \
+RUN dnf upgrade -y && dnf install -y \
   gnutls-devel \
   git \
   make \
@@ -26,11 +24,8 @@ RUN dnf install -y \
   optipng
 
 WORKDIR /sagui
-
-VOLUME /sagui/output
-
 COPY builder.sh .
-
 RUN chmod +x ./builder.sh
 
+VOLUME /sagui/output
 ENTRYPOINT ./builder.sh

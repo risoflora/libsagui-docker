@@ -8,20 +8,18 @@
 
 set -e
 
-if [ ! -f /.dockerenv ]; then
-  echo "It will be performed by the container automatically. Exiting ...."
-  exit 1
-fi
-
+workdir=/sagui/libsagui
 dist=/sagui/output
 
 clean() {
-  rm -rf ./*
+  cd $workdir
+  rm -rf ./build
+  mkdir build
+  cd build
 }
 
 version=$(curl -s https://raw.githubusercontent.com/risoflora/libsagui/master/include/sagui.h | sed -n 's/#define SG_VERSION_\(.*\) \([0-9]\)/\2/p' | tr '\n' '.' | sed 's/.$//')
 git clone https://github.com/risoflora/libsagui.git libsagui
-cd libsagui && mkdir build && cd build/
 
 # linux_amd64
 clean

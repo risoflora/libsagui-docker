@@ -10,8 +10,7 @@ set -e
 
 output="$(realpath .)/output"
 rm -rf $output
-+mkdir -p $output
-
+mkdir -p $output
 
 docker build -t libsagui .
 docker run --rm -v "$output":/sagui/output libsagui

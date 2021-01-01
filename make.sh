@@ -20,4 +20,4 @@ fi
 echo "Using $docker_cmd ..."
 
 $docker_cmd build -t libsagui .
-$docker_cmd run --rm -v "$output":/sagui/output libsagui
+$docker_cmd run --rm --privileged -v "$output":/sagui/output libsagui

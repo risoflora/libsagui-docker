@@ -5,7 +5,7 @@ Official Docker image for Sagui library.
 ## Building latest version
 
 ```bash
-sudo rm -rf output/
+git clone https://github.com/risoflora/libsagui-docker.git
 ./make.sh
 ```
 

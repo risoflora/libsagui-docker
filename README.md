@@ -14,11 +14,16 @@ git clone https://github.com/risoflora/libsagui-docker.git
 ```bash
 tree -L 1 output/
 output/
+├── gnutls-3.6.15-mingw_386.zip
+├── gnutls-3.6.15-mingw_amd64.zip
 ├── html
-├── libsagui-3.0.0_checksums.txt
-├── libsagui-3.0.0-linux_amd64.tar.gz
-├── libsagui-3.0.0-windows_386.zip
-└── libsagui-3.0.0-windows_amd64.zip
+├── libsagui-3.3.1_checksums.txt
+├── libsagui-3.3.1-linux_amd64.tar.gz
+├── libsagui-3.3.1-windows_386.zip
+├── libsagui-3.3.1-windows_amd64.zip
+├── libsagui_tls-3.3.1-linux_amd64.tar.gz
+├── libsagui_tls-3.3.1-windows_386.zip
+└── libsagui_tls-3.3.1-windows_amd64.zip
 
-1 directory, 4 files
+1 directory, 9 files
 ```

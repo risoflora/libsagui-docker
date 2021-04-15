@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 ############################################################################
 
-FROM fedora:33
+FROM fedora:32
 
 RUN dnf upgrade -y && dnf install -y \
   gnutls-devel \

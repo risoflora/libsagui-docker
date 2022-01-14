@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ############################################################################
-# Copyright (c) 2020-2021 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
+# Copyright (c) 2020-2022 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
 #
 # SPDX-License-Identifier: MIT
 ############################################################################
@@ -18,7 +18,7 @@ clean() {
   cd build
 }
 
-version=$(curl -s https://raw.githubusercontent.com/risoflora/libsagui/master/include/sagui.h | sed -n 's/#define SG_VERSION_\(.*\) \([0-9]\)/\2/p' | tr '\n' '.' | sed 's/.$//')
+version=$(curl -s https://raw.githubusercontent.com/risoflora/libsagui/main/include/sagui.h | sed -n 's/#define SG_VERSION_\(.*\) \([0-9]\)/\2/p' | tr '\n' '.' | sed 's/.$//')
 git clone https://github.com/risoflora/libsagui.git libsagui
 
 # linux_amd64

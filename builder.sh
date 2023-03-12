@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ############################################################################
-# Copyright (c) 2020-2022 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
+# Copyright (c) 2020-2023 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
 #
 # SPDX-License-Identifier: MIT
 ############################################################################
@@ -10,6 +10,7 @@ set -e
 
 workdir=/sagui/libsagui
 dist=/sagui/output
+cmake_cmd="cmake -Wno-dev"
 
 clean() {
   cd $workdir
@@ -23,34 +24,34 @@ git clone https://github.com/risoflora/libsagui.git libsagui
 
 # linux_amd64
 clean
-cmake -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=./Output ..
+$cmake_cmd -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=./Output ..
 make package
 cp "libsagui-$version.tar.gz" "$dist/libsagui-$version-linux_amd64.tar.gz"
 
 # linux_amd64 (TLS)
-cmake -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=./Output -DSG_HTTPS_SUPPORT=ON ..
+$cmake_cmd -DCMAKE_C_COMPILER=clang -DCMAKE_INSTALL_PREFIX=./Output -DSG_HTTPS_SUPPORT=ON ..
 make package
 cp "libsagui-$version.tar.gz" "$dist/libsagui_tls-$version-linux_amd64.tar.gz"
 
 # windows_amd64
 clean
-cmake -DMINGW64=ON -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-mingw32-Linux.cmake" ..
+$cmake_cmd -DMINGW64=ON -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-mingw32-Linux.cmake" ..
 make package
 cp "libsagui-$version.zip" "$dist/libsagui-$version-windows_amd64.zip"
 
 # windows_amd64 (TLS)
-cmake -DMINGW64=ON -DSG_HTTPS_SUPPORT=ON ..
+$cmake_cmd -DMINGW64=ON -DSG_HTTPS_SUPPORT=ON ..
 make package
 cp "libsagui-$version.zip" "$dist/libsagui_tls-$version-windows_amd64.zip"
 
 # windows_386
 clean
-cmake -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-mingw32-Linux.cmake" ..
+$cmake_cmd -DCMAKE_TOOLCHAIN_FILE="../cmake/Toolchain-mingw32-Linux.cmake" ..
 make package
 cp "libsagui-$version.zip" "$dist/libsagui-$version-windows_386.zip"
 
 # windows_386 (TLS)
-cmake -DSG_HTTPS_SUPPORT=ON ..
+$cmake_cmd -DSG_HTTPS_SUPPORT=ON ..
 make package
 cp "libsagui-$version.zip" "$dist/libsagui_tls-$version-windows_386.zip"
 
@@ -64,9 +65,9 @@ zip -9 "$dist/gnutls-${gnutls_version}-mingw_amd64.zip" /usr/x86_64-w64-mingw32/
 
 # docs
 clean
-cmake -DSG_BUILD_HTML=ON -DSG_HTTPS_SUPPORT=ON ..
+$cmake_cmd -DSG_BUILD_HTML=ON -DSG_HTTPS_SUPPORT=ON ..
 make doc
-optipng -o7 docs/html/*.png docs/html/search/*.png
+optipng -o7 docs/html/*.png
 cp -r docs/html $dist/
 
 # checksums

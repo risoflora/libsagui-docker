@@ -1,15 +1,17 @@
 ############################################################################
-# Copyright (c) 2020-2023 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
+# Copyright (c) 2020-2024 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
 #
 # SPDX-License-Identifier: MIT
 ############################################################################
 
-FROM fedora:37
+FROM fedora:39
 
 RUN dnf upgrade -y && dnf install -y \
   gnutls-devel \
   git \
   make \
+  autoconf \
+  automake \
   clang \
   mingw32-gcc \
   mingw64-gcc \
@@ -23,7 +25,7 @@ RUN dnf upgrade -y && dnf install -y \
 
 LABEL Maintainer="Silvio Clecio (silvioprog) <silvioprog@gmail.com>"
 LABEL Name="libsagui"
-LABEL Version="2.1.1"
+LABEL Version="2.1.2"
 
 WORKDIR /sagui
 COPY builder.sh .

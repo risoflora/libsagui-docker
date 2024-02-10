@@ -1,10 +1,10 @@
 #!/bin/sh
 
-#######################################################################
-# Copyright (c) 2020 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
+############################################################################
+# Copyright (c) 2020-2024 Silvio Clecio (silvioprog) <silvioprog@gmail.com>
 #
 # SPDX-License-Identifier: MIT
-#######################################################################
+############################################################################
 
 set -e
 
@@ -19,5 +19,5 @@ fi
 
 echo "Using $docker_cmd ..."
 
-$docker_cmd build -t libsagui .
-$docker_cmd run --rm --privileged -v "$output":/sagui/output libsagui
+$docker_cmd build --platform linux/amd64 --tls-verify=false -t libsagui .
+$docker_cmd run --platform linux/amd64 -it --rm --privileged -v "$output":/sagui/output libsagui

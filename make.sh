@@ -19,8 +19,16 @@ fi
 
 echo "Using $docker_cmd ..."
 
-$docker_cmd build --platform linux/arm64 --tls-verify=false -t libsagui-arm64 -f Dockerfile.arm64
-$docker_cmd run --platform linux/arm64 -it --rm --privileged -v "$output":/sagui/output libsagui-arm64
+if [ "$(uname)" = "Linux" ]; then
+	$docker_cmd build --platform=linux/arm64 -f Dockerfile.arm64 -t libsagui-arm64 .
+	$docker_cmd run --platform=linux/arm64 --rm --privileged -v "$output":/sagui/output -it libsagui-arm64
 
-$docker_cmd build --platform linux/amd64 --tls-verify=false -t libsagui .
-$docker_cmd run --platform linux/amd64 -it --rm --privileged -v "$output":/sagui/output libsagui
+	$docker_cmd build --platform=linux/amd64 -t libsagui .
+	$docker_cmd run --platform=linux/amd64 --rm --privileged -v "$output":/sagui/output -it libsagui
+else
+	$docker_cmd build --platform linux/arm64 --tls-verify=false -f Dockerfile.arm64 -t libsagui-arm64
+	$docker_cmd run --platform linux/arm64 --rm --privileged -v "$output":/sagui/output -it libsagui-arm64
+
+	$docker_cmd build --platform linux/amd64 --tls-verify=false -t libsagui .
+	$docker_cmd run --platform linux/amd64 --rm --privileged -v "$output":/sagui/output -it libsagui
+fi

@@ -9,6 +9,9 @@ git clone https://github.com/risoflora/libsagui-docker.git
 ./make.sh
 ```
 
+**NOTE:** On Ubuntu, remember to: `sudo apt-get install -y qemu qemu-user-static`.
+And then: `docker buildx ls`. ([Reference](https://stackoverflow.com/questions/73253352/docker-exec-bin-sh-exec-format-error-on-arm64))
+
 ## Generated files
 
 ```bash

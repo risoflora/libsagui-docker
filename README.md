@@ -6,6 +6,7 @@ Official Docker image for Sagui library.
 
 ```bash
 git clone https://github.com/risoflora/libsagui-docker.git
+cd libsagui-docker/
 ./make.sh
 ```
 
